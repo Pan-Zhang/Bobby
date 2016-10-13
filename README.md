@@ -1,0 +1,5 @@
+利用Rxjava+retrofit实现的MVP架构框架
+1.利用retrofit实现http交互主要实现对json数据的解析和回调处理。
+2.利用Rxjava写了一个RxBus事件总线管理，通过EventType区分事件类型并带回事件信息。
+3.对okhttp3进行了简单封装，为了保持retrofit的代码简洁性，支持上传及下载进度监听，当然也支持其它http请求。
+4.将okhttp3与Picasso图片加载框架进行绑定，在application中完成。
