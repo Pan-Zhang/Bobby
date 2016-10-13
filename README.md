@@ -1,5 +1,7 @@
 利用Rxjava+retrofit实现的MVP架构框架
 
+主要功能模块：
+
 1.利用retrofit实现http交互主要实现对json数据的解析和回调处理。retrofit的主要好处是简化了http请求的封装，并且其本身的返回是在主线程中的，这意味着可以在回调中直接对组件进行各种操作，但是问题是操作还是不够灵活，特别是涉及到子线程处理时，进程的切换很麻烦。最好的方式是引用rxjava，可以使操作变得更灵活也更安全。
 
 2.利用Rxjava写了一个RxBus事件总线管理，通过EventType区分事件类型并带回事件信息。主要针对可能被多个观察者订阅的事件进行统一管理，以及跨activity和fragment的事件监听，摆脱了传统方式的繁琐和不安全性。
@@ -7,3 +9,13 @@
 3.对okhttp3进行了简单封装，为了保持retrofit的代码简洁性，支持上传及下载进度监听，当然也支持其它http请求。okhttp3的封装主要基于两点考虑，第一点是http协议信息的统一处理需要，比如cookie、加密等。第二点是为了维护retrofit的简洁性，比如进度监听可能破换retrofit的简洁性，本人更偏向于利用retrofit进行json数据的解析。
 
 4.将okhttp3与Picasso图片加载框架进行绑定，在application中完成。
+
+5.封装数据库的处理工具，当然也可以使用其它第三方或自己的数据库工具。
+
+MVP封包：
+
+1.model包主要存放bean。
+
+2.view包包含了activity、widget（自定义控件）、adapter、viewcontrol四个包，activity与activity类对应，封装了baseactivity基类统一一些共有操作，viewcontrol包含大量回调，其与activity一一对应，主要对activity中的组件进行操作，主要为了实现activity与presenter的解耦。
+
+3.present包包含了各个activity所对应的presenter，两者通过viewcontrol回调实现控件更新等操作。
