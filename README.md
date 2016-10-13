@@ -14,10 +14,10 @@
 
 使用方法 初始化DatabaseHelper传入DatabaseManager或DatabaseManager2即可。
 
-（1）DatabaseManager建议在Application的create方法中初始化，如： DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext()); DatabaseManager.initializeInstance(databaseHelper);
+（1）DatabaseManager（线程安全）建议在Application的create方法中初始化，如： DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext()); DatabaseManager.initializeInstance(databaseHelper);
 
 具体调用因为使用单例模式只需getInstance（）即可调用。
-（2）DatabaseManager2建议在activity的oncreate中初始化，在ondestroy中销毁。
+（2）DatabaseManager2（非线程安全）建议在activity的oncreate中初始化，在ondestroy中销毁。
 
 数据库采用随开随关的方式，所以安全性得到保障。如果需要多个数据库操作，参照DatabaseHelper和DatabaseManager写法即可。
 
