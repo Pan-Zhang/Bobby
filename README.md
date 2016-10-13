@@ -6,11 +6,11 @@
 
 2.利用Rxjava写了一个RxBus事件总线管理，通过EventType区分事件类型并带回事件信息。主要针对可能被多个观察者订阅的事件进行统一管理，以及跨activity和fragment的事件监听，摆脱了传统方式的繁琐和不安全性。
 
-3.对okhttp3进行了简单封装，为了保持retrofit的代码简洁性，支持上传及下载进度监听，当然也支持其它http请求。okhttp3的封装主要基于两点考虑，第一点是http协议信息的统一处理需要，比如cookie、加密等。第二点是为了维护retrofit的简洁性，比如进度监听可能破换retrofit的简洁性，本人更偏向于利用retrofit进行json数据的解析。
+3.对okhttp3进行了简单封装，单例模式保证统一性和唯一性，支持上传及下载进度监听，当然也支持其它http请求。okhttp3的封装主要基于两点考虑，第一点是http协议信息的统一处理需要，比如cookie、加密等。第二点是为了维护retrofit的简洁性，比如进度监听可能破换retrofit的简洁性，本人更偏向于利用retrofit进行json数据的解析。
 
-4.将okhttp3与Picasso图片加载框架进行绑定，在application中完成。
+4.Picasso图片加载框架，将okhttp3与Picasso图片加载框架进行绑定，在application中完成。
 
-5.封装数据库的处理工具，当然也可以使用其它第三方或自己的数据库工具。
+5.数据库管理工具，支持增删查改及批量操作等，当然也可以使用其它第三方或自己的数据库工具。
 
 MVP封包：
 
