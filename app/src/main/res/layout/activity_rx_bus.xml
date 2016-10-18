@@ -9,4 +9,28 @@
         android:text="test"
         android:id="@+id/button"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="download"
+        android:id="@+id/download"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="myhttp"
+        android:id="@+id/myget"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="downloadtest"
+        android:id="@+id/downloadtest"/>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="uploadtest"
+        android:id="@+id/uploadtest"/>
+
 </LinearLayout>

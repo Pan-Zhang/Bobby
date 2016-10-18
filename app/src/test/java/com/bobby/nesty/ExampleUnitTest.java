@@ -3,6 +3,7 @@ package com.bobby.nesty;
 import android.util.Log;
 
 import com.bobby.nesty.model.GirlsBean;
+import com.bobby.nesty.util.http.HttpUtil;
 
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.observables.GroupedObservable;
 import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
@@ -174,9 +176,113 @@ public class ExampleUnitTest {
 
     @Test
     public void subject(){
-        Subject<Object, Object> subject = new SerializedSubject<>(PublishSubject.create());
+//        Subject<Object, Object> subject = new SerializedSubject<>(PublishSubject.create());
+//
+//        subject.subscribe(new Observer<Object>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(Object o) {
+//                String str = o.toString();
+//            }
+//        });
+//        subject.onNext("dongxi");
+//
+//        String s = "aaa";
+//        Observable.just(s).doOnNext(new Action1<String>() {
+//            @Override
+//            public void call(String s) {
+//                String d = s;
+//            }
+//        }).subscribe(new Subscriber<String>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(String s) {
+//                String str = s;
+//            }
+//        });
 
-        subject.subscribe(new Observer<Object>() {
+        Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("a");
+            }
+        }).flatMap(new Func1<String, Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call(String s) {
+                return Observable.just(s.hashCode());
+            }
+        }).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                String s = e.toString();
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                String str = integer.toString();
+            }
+        });
+    }
+
+    @Test
+    public void MergeTest(){
+
+        Observable.merge(Observable.just("a","b"), Observable.just("c","d"))
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        String str = s;
+                    }
+                });
+    }
+
+    @Test
+    public void httpget(){
+
+    }
+
+    @Test
+    public void testScan(){
+
+        Observable.concat(Observable.just("abc","ab","a").groupBy(new Func1<String, String>() {
+            @Override
+            public String call(String s) {
+                return "dd";
+            }
+        })).subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
 
@@ -188,18 +294,9 @@ public class ExampleUnitTest {
             }
 
             @Override
-            public void onNext(Object o) {
-                String str = o.toString();
+            public void onNext(String s) {
+                String str = s;
             }
         });
-        subject.onNext("dongxi");
-
-        String s = "aaa";
-        Observable.just(s).doOnNext(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                String d = s;
-            }
-        }).subscribe();
     }
 }

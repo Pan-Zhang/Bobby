@@ -32,8 +32,8 @@ public class MyRetrofit {
     }
 
     /**
-     * 文件上传进度监听
-     * @param progressListener 进度回调
+     * 鏂囦欢涓婁紶杩涘害鐩戝惉
+     * @param progressListener 杩涘害鍥炶皟
      * @return
      */
     public static Retrofit UploadProgress(ProgressListener progressListener){
@@ -45,8 +45,8 @@ public class MyRetrofit {
     }
 
     /**
-     * 文件下载进度监听
-     * @param progressListener 进度回调
+     * 鏂囦欢涓嬭浇杩涘害鐩戝惉
+     * @param progressListener 杩涘害鍥炶皟
      * @return
      */
     public static Retrofit DownloadProgress(ProgressListener progressListener){

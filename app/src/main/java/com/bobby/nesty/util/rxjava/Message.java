@@ -7,8 +7,6 @@ public class Message {
     private EventType code;
     private Object object;
 
-    public Message() {}
-
     public Message(EventType code, Object o) {
         this.code = code;
         this.object = o;
