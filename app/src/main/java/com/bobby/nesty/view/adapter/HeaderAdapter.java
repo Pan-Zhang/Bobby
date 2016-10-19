@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bobby.nesty.R;
+import com.bobby.nesty.view.widget.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class HeaderAdapter extends PagerAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_recycle_test, null);
         ImageView iv = (ImageView) view.findViewById(R.id.id_item);
         Picasso.with(context).load(list.get(position))
-                .resize(400, 400).centerInside().placeholder(R.mipmap.ic_launcher).into(iv);
+                .resize(400, 400).centerInside().transform(new CircleTransform()).placeholder(R.mipmap.ic_launcher).into(iv);
         container.addView(view);
         return view;
     }
