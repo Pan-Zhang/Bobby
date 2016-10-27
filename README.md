@@ -28,3 +28,9 @@ MVP封包：
 2.view包包含了activity、widget（自定义控件）、adapter、viewcontrol四个包，activity与activity类对应，封装了baseactivity基类统一一些共有操作，viewcontrol包含大量回调，其与activity一一对应，主要对activity中的组件进行操作，主要为了实现activity与presenter的解耦。
 
 3.present包包含了各个activity所对应的presenter，两者通过viewcontrol回调实现控件更新等操作。
+
+更新
+
+加入了一个新的handler封装，对其callback封装了弱引用，现在直接调用该handler也不会导致activity被持有。
+
+mvp模式中的view操作本身是通过一个接口回调操作的，经过大量mat内存分析发现还是存在内存泄漏的现象，所以不再将activity继承接口进行回调，而是使用静态内部类，并使用弱引用对activity进行绑定。不过这一点导致每个activity都需要重新申明一个内部类去实现接口，下一步想办法进行封装处理。
