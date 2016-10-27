@@ -6,5 +6,6 @@ package com.bobby.nesty.util.rxjava;
 public enum EventType {
 
     OnClick,
-    OnLongClick
+    OnLongClick,
+    RecycleadapterClick
 }

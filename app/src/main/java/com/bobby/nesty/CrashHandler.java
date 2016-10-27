@@ -29,16 +29,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public static final String TAG = "CrashHandler";
 
     private Thread.UncaughtExceptionHandler mDefaultHandler;
-    private static CrashHandler INSTANCE = new CrashHandler();
     private Context mContext;
     private Map<String, String> infos = new HashMap<String, String>();
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-    public static CrashHandler getInstance() {
-        return INSTANCE;
-    }
-
-    public void init(Context context) {
+    public CrashHandler(Context context){
         mContext = context;
 //        //获取系统默认的UncaughtException处理器
 //        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();

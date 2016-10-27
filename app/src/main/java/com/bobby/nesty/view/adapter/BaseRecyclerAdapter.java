@@ -6,6 +6,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bobby.nesty.util.rxjava.EventType;
+import com.bobby.nesty.util.rxjava.RxBus;
+
 import java.util.List;
 
 /**
@@ -19,12 +22,6 @@ public abstract class BaseRecyclerAdapter<T,V extends RecyclerView.ViewHolder> e
     private List<T> mDatas;
 
     private View mHeaderView;
-
-    private OnItemClickListener<T> mListener;
-
-    public void setOnItemClickListener(OnItemClickListener<T> li) {
-        mListener = li;
-    }
 
     public void setHeaderView(View headerView) {
         mHeaderView = headerView;
@@ -62,14 +59,12 @@ public abstract class BaseRecyclerAdapter<T,V extends RecyclerView.ViewHolder> e
         final T data = mDatas.get(pos);
         onBind((V)viewHolder, pos, data);
 
-        if(mListener != null) {
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onItemClick(pos, data);
-                }
-            });
-        }
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxBus.getInstance().post(EventType.RecycleadapterClick, data);
+            }
+        });
     }
 
     @Override
@@ -115,13 +110,10 @@ public abstract class BaseRecyclerAdapter<T,V extends RecyclerView.ViewHolder> e
     public abstract V onCreate(ViewGroup parent, final int viewType);
     public abstract void onBind(V viewHolder, int RealPosition, T data);
 
-    public class Holder extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder {
         public Holder(View itemView) {
             super(itemView);
         }
     }
 
-    public interface OnItemClickListener<T> {
-        void onItemClick(int position, T data);
-    }
 }

@@ -20,4 +20,24 @@
         android:text="uploadtest"
         android:id="@+id/uploadtest"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_parent"
+        android:layout_below="@id/uploadtest">
+
+        <Button
+            android:background="@drawable/icon_banner_dot_over"
+            android:id="@+id/menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/move_iv"
+            android:background="@mipmap/ic_launcher"/>
+
+    </FrameLayout>
+
 </RelativeLayout>

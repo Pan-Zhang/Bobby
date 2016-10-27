@@ -1,11 +1,10 @@
 package com.bobby.nesty.view.widget;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
-import com.bobby.nesty.MyApplication;
 import com.bobby.nesty.R;
 import com.squareup.picasso.Transformation;
 
@@ -17,8 +16,11 @@ public class CircleTransform implements Transformation {
 
     private int mBorderWidth = 4;  //边框宽度
     private int mBorderColor = R.color.colorAccent;  //边框颜色
+    private Context context;
 
-    public CircleTransform(){}
+    public CircleTransform(Context context){
+        this.context = context.getApplicationContext();
+    }
 
     public CircleTransform(int mBorderWidth, int mBorderColor){
 
@@ -54,7 +56,7 @@ public class CircleTransform implements Transformation {
         Paint mBorderPaint = new Paint();
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setStrokeWidth(mBorderWidth);
-        mBorderPaint.setColor(MyApplication.mInstance.getResources().getColor(mBorderColor));
+        mBorderPaint.setColor(context.getResources().getColor(mBorderColor));
         mBorderPaint.setStrokeCap(Paint.Cap.ROUND);
         mBorderPaint.setAntiAlias(true);
 

@@ -20,7 +20,7 @@ public class TestRecycleViewAdapter extends BaseRecyclerAdapter<GirlsBean.Result
     private Context context;
 
     public TestRecycleViewAdapter(Context context, GirlsBean girlsBean){
-        this.context = context;
+        this.context = context.getApplicationContext();
         if(girlsBean!=null){
             refreshDatas(girlsBean.getResults());
         }
@@ -45,7 +45,7 @@ public class TestRecycleViewAdapter extends BaseRecyclerAdapter<GirlsBean.Result
                 .centerInside().placeholder(R.mipmap.ic_launcher).into(viewHolder.iv);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder
+    static class MyViewHolder extends RecyclerView.ViewHolder
     {
 
         ImageView iv;

@@ -1,12 +1,15 @@
 package com.bobby.nesty.util.http;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -17,11 +20,30 @@ import okhttp3.Response;
  */
 public abstract class HandlerJsonCallback<T> extends TypeToken<T> implements Callback {
 
-    private static Handler handler = new Handler(Looper.getMainLooper());
+    private Handler handler = new MyHandler(this);
 
     public abstract void success(T t);
 
     public abstract void failed(String str);
+
+    static class MyHandler extends Handler{
+
+        private WeakReference<okhttp3.Callback> mActivityWeakReference;
+
+        public MyHandler(okhttp3.Callback callback) {
+            mActivityWeakReference=new WeakReference<okhttp3.Callback>(callback);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            HandlerJsonCallback handlerJsonCallback = (HandlerJsonCallback) mActivityWeakReference.get();
+            if(handlerJsonCallback != null){
+                msg.what = 0;
+                handlerJsonCallback.success(msg.obj);
+            }
+            super.handleMessage(msg);
+        }
+    }
 
     @Override
     public void onFailure(Call call, IOException e) {
